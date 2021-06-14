@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="Simple Socket-io Example">
+  <meta name="author" content="HTIL">
+</head>
+
+<body>
+    <script src="/socket.io/socket.io.js"></script>
+  <script>
+     var NodeSocket = function() {
+        this.socket = io();
+
+        this.sendServerMsgFromClient = function() {
+            console.log("sending msg")
+            this.socket.emit("clientMsg", {msg:"A message from the client"})
+        };
+
+        // Create listener
+        this.socket.on("exampleServerEvent", function(packet) {
+           console.log("Client: ", packet)
+        });
+    };
+
+    socket = new NodeSocket();
+
+  </script>
+</body>
+<button onclick="socket.sendServerMsgFromClient()">Click me</button>
+</html>
